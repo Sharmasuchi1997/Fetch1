@@ -14,25 +14,36 @@
     <button  id="ButtonIdR" onclick="myFunction()">
         Retrieve
     </button>
-    
+    <br>
+    <table>
+       <tr id="name">
+            Name
+       </tr>
+       <!-- <br> -->
+       <tr id="age">
+            Age
+       </tr>
+    </table>
 </body>
 <script>
     let nameID=document.getElementById('nameId')
     let ageID=document.getElementById('ageId')
     let submitBtn=document.getElementById('ButtonId')
-    let submitBtnR=document.getElementById('Retrieve')
-   
+    let submitBtnR=document.getElementById('ButtonIdR')
+    let nameRow=document.getElementById('name')
+    let ageRow=document.getElementById('age')
+
+
    submitBtn.addEventListener('click', function(){
     localStorage.setItem("Name", nameID.value)
-    localStorage.setItem("Age", ageID.value)
+    localStorage.setItem( "Age", ageID.value)
     console.log("submit")
    })
    
-   function myFunction(){
-    localStorage.getItem("Age")
-    console.log("Retrieve")
-   }
-
+   submitBtnR.addEventListener('click', function(){
+        nameRow.textContent=localStorage.getItem("Name")
+        ageRow.textContent=localStorage.getItem("Age")
+   })
   
 </script>
 </html>
