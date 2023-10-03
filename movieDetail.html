@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDB Movie </title>
+</head>
+<body>
+    <style>
+        .movie-Card{
+                border: 2px solid red;
+                padding: 16px;
+                margin: 20px;
+                width: 30%;
+                height: auto;
+                display: grid;
+
+            }
+        .movieTitle{
+            font-size: medium;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+    <div id="root"></div>
+    <input  id="inputTag" type="text" placeholder="search">
+    <select name="movieList" id="selectTag">
+        <option id="nameSelect"  value="name">Movie Title</option>
+        <option id="yearSelect" value="year">Year Of Release</option>
+        <option id="imbdIdSelect" value="ImdbID">IMDB ID</option>
+        
+    </select>
+    <div id="movieCardDetail">
+        <div id="movieImageElement">
+            <img src="" alt="movie.Poster">
+        </div>
+
+    </div>
+    <script>
+        let OMDB_API_KEY= "2a9f40ca"
+        let rootElement=document.getElementById("root")
+        let inputTagElement=document.getElementById("inputTag")
+        let nameSelect=document.getElementById("nameSelect")
+        let yearSelect=document.getElementById("yearSelect")
+        let imbdIdSelect=document.getElementById("imdbIdSelect")
+        
+        fetch('https://www.omdbapi.com/?apikey=2a9f40ca&s=superman')
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(movieList){
+            let movies=movieList.Search
+            displayData(movies)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+
+        function displayData(data){
+            data.forEach(function(movie)
+            {
+            let movieCard=document.createElement("div")
+            // let movieCardDetail=document.getElementById("movieCardDetail")
+
+            // movieCardDetail.append(movieCard)
+            movieCard.className="movie-Card"
+
+            let movieImageElement=document.createElement("img")
+            movieImageElement.src=movie.Poster
+
+            let movieTitleElement=document.createElement("p")
+            movieTitleElement.textContent=movie.Title
+            movieTitleElement.className="movieTitle"
+
+            let movieYearElement=document.createElement("p")
+            movieYearElement.textContent=movie.Year
+            movieYearElement.className="movieTitle"
+
+            let goToDetailBtn=document.createElement("button")
+            goToDetailBtn.textContent="Go to movie details"
+
+            goToDetailBtn.onclick=function(){
+               
+                localStorage.setItem('imdbID', movie.imdbID)
+                location.href="GoToMovie.html"
+
+
+            }
+
+            movieCard.append(movieImageElement,  movieTitleElement, movieYearElement, goToDetailBtn)
+            rootElement.append( movieCard)
+
+    })
+        console.log(rootElement)
+        // console.log(data)
+        }
+
+    </script>
+</body>
+</html>

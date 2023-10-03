@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movied Detail</title>
+</head>
+<body>
+    <h1>
+        Movie Datails
+    </h1>
+    <div id="container">
+
+    </div>
+    <script>
+        let OMDB_API_KEY= "2a9f40ca"
+        let imdbID=localStorage.getItem("imdbID")
+        // console.log(imdbIDElement)
+        fetch(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${imdbID}`)
+        .then(function(response)
+        {
+            return response.json()
+        })
+        .then(function(movieDetails)
+        {
+            // displayMovieDetail(data)
+            console.log(movieDetails)
+        })
+        .catch(function(err){
+            console.log(error)
+        })
+
+        
+    </script>
+</body>
+</html>
